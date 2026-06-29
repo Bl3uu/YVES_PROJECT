@@ -1,0 +1,6 @@
+# Create a dedicated environment for Yves
+conda create -n yves_env python=3.10 -y
+conda activate yves_env
+
+# Install the essentials for local AI and file indexing
+pip install ollama langchain-community chromadb jupyter

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "PlpZGKnP6Xo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dusti\\Downloads\\Projects\\YVES_CORE\\ui\\YvesInterface\\YvesInterface\\YvesInterface.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dusti\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

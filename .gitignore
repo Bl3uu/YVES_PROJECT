@@ -1,0 +1,21 @@
+# IDEs and OS overhead
+.vs/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python runtime environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+env/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Runtime Application Data (Local Vector Storage)
+data/memory/
+*.sqlite3
