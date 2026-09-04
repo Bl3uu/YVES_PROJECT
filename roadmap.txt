@@ -1,0 +1,59 @@
+Here is the step-by-step overhaul roadmap for YVES. This plan focuses on building a fast, reactive, single-model local AI assistant on your laptop using qwen2.5:7b.
+
+Phase 1: Foundation & Memory Layer
+
+Objective: Establish the minimalist configuration and short-term conversation tracking.
+
+Goals:
+
+Clean up project directories and create a simplified yves_config.yaml pointing exclusively to qwen2.5:7b.
+
+Refactor history_manager.py into a lightweight sliding-window memory buffer to keep chat context tight and fast.
+
+Verify config_loader.py correctly parses paths and model settings without legacy code dependencies.
+
+Phase 2: Core Brain Integration (YvesCore)
+
+Objective: Unify personality, prompt formatting, and Ollama execution into a single, high-performance module.
+
+Goals:
+
+Build yves_core.py to handle both system directives and Ollama API communication in one place.
+
+Implement dynamic situational context injection (injecting current time, date, location, and OS status before every turn).
+
+Establish YVES's refined British-coded, deadpan, witty persona without multi-model overhead.
+
+Phase 3: Interactive CLI & Live Feedback Loop
+
+Objective: Create a smooth terminal interface for direct daily interaction.
+
+Goals:
+
+Develop main.py as the central execution loop with clean formatting and streaming output.
+
+Implement special session commands (e.g., /reset to clear memory, /status to check system health, /exit to quit).
+
+Ensure error handling gracefully catches Ollama service drops or missing local models.
+
+Phase 4: Tool Calling & Local Action Bridge
+
+Objective: Elevate YVES from a conversational bot to a functional system sidekick.
+
+Goals:
+
+Leverage qwen2.5:7b's native function-calling capabilities using structured JSON.
+
+Create a modular tools/ system where YVES can execute real local Python functions (e.g., checking system RAM/CPU, opening specific apps, or reading local text files).
+
+Safeguard execution so YVES never runs destructive OS commands without explicit confirmation.
+
+Phase 5: Extensibility & Future Modules (Optional / Secondary)
+
+Objective: Prepare the architecture for future expansions (like voice or game dev integrations) when you are ready.
+
+Goals:
+
+Add lightweight local text-to-speech (TTS) or speech-to-text (STT) hooks.
+
+Build project-specific hooks (e.g., simple scripts to assist with your game dev workflow).

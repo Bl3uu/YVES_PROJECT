@@ -1,12 +1,10 @@
 # Yves System Configuration
 paths:
-  inventory: "data/inventory"
-  memory: "data/memory"
+  data: "data"
 
 models:
-  logic: "qwen2.5-coder:7b"
-  personality: "llama3.2:3b"
+  core: "qwen2.5:7b"
 
 settings:
   temperature: 0.7
-  chunk_size: 1000
+  max_history: 10

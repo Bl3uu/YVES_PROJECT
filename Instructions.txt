@@ -4,3 +4,10 @@ conda activate yves_env
 
 # Install the essentials for local AI and file indexing
 pip install ollama langchain-community chromadb jupyter
+
+# via vscode
+
+python -m venv venv
+
+.\venv\Scripts\activate
+

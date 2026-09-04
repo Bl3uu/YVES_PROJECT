@@ -1,43 +1,29 @@
-from collections import deque
-from typing import List, Dict
+from typing import Dict, List
+
 
 class HistoryManager:
-    """Manages the short-term conversation memory buffer for the AI engine.
+  """Manages short-term sliding window conversation context."""
 
-    This class acts as a rolling FIFO (First-In, First-Out) queue using a deque
-    to ensure the LLM retains context of recent interactions without exceeding 
-    the token window constraints.
+  def __init__(self, max_limit: int = 10) -> None:
+    self.max_limit: int = max_limit
+    self.history: List[Dict[str, str]] = []
 
-    Attributes:
-        buffer (deque): A thread-safe, double-ended queue storing message frames.
-    """
+  def add_turn(self, user_message: str, assistant_message: str) -> None:
+    """Appends a completed interaction turn to the history array."""
+    self.history.append({"role": "user", "content": user_message})
+    self.history.append({"role": "assistant", "content": assistant_message})
+    self._trim_history()
 
-    def __init__(self, max_limit: int = 10) -> None:
-        """Initialises the HistoryManager with a strict buffer size constraint.
+  def get_history(self) -> List[Dict[str, str]]:
+    """Returns the current formatted conversation logs."""
+    return self.history
 
-        Args:
-            max_limit (int): The maximum number of historical messages to retain 
-                before old entries are dropped. Defaults to 10.
-        """
-        # setting maxlen automatically drops the oldest entry when new items are appended
-        self.buffer: deque = deque(maxlen=max_limit)
+  def clear(self) -> None:
+    """Wipes active session conversation logs."""
+    self.history.clear()
 
-    def add_entry(self, role: str, content: str) -> None:
-        """Adds a new message exchange to the history buffer.
-
-        Args:
-            role (str): The author of the message ('user' or 'assistant').
-            content (str): The literal text payload of the message.
-        """
-        self.buffer.append({"role": role, "content": content})
-
-    def get_transcript(self) -> List[Dict[str, str]]:
-        """Retrieves the full stored chat history as a standard list.
-
-        Ollama requires a standard list format for processing messages, 
-        so the internal deque is cast back to a list during retrieval.
-
-        Returns:
-            List[Dict[str, str]]: The active conversation history entries.
-        """
-        return list(self.buffer)
+  def _trim_history(self) -> None:
+    """Enforces the sliding window limit (2 entries per turn: user + assistant)."""
+    max_entries = self.max_limit * 2
+    if len(self.history) > max_entries:
+      self.history = self.history[-max_entries:]
