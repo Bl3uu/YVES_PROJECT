@@ -1,31 +1,29 @@
-from duckduckgo_search import DDGS
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+
+from ddgs import DDGS
 from tools.tool_registry import registry
 
 @registry.register(
     name="web_search",
-    description="Searches the web for current events, live information, or facts YVES does not know.",
+    description="Searches the web for external information, news, or technical documentation.",
     parameters={
         "type": "object",
         "properties": {
-            "query": {
-                "type": "string",
-                "description": "The search query to look up on the internet."
-            }
+            "query": {"type": "string", "description": "The search query string."}
         },
         "required": ["query"]
     }
 )
 def web_search(query: str) -> str:
-    """Performs a web search using DuckDuckGo and returns key snippets."""
     try:
         results = list(DDGS().text(query, max_results=3))
         if not results:
-            return "No relevant web results found."
+            return "No web results found."
         
-        summary = []
-        for item in results:
-            summary.append(f"Title: {item['title']}\nSnippet: {item['body']}\nSource: {item['href']}\n")
-        
-        return "\n".join(summary)
+        formatted = []
+        for r in results:
+            formatted.append(f"Title: {r.get('title')}\nURL: {r.get('href')}\nSnippet: {r.get('body')}")
+        return "\n\n".join(formatted)
     except Exception as e:
-        return f"Failed to perform search: {str(e)}"
+        return f"Web search failed: {str(e)}"
