@@ -4,7 +4,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 from yves_config import YvesConfig
-from history_manager import HistoryManager
+from yves_config import HistoryManager
 from yves_core import YvesCore
 
 

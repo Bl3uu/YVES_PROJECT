@@ -19,3 +19,11 @@ env/
 # Runtime Application Data (Local Vector Storage)
 data/memory/
 *.sqlite3
+
+# PNGTuber Character Assets (Picrew / Custom)
+assets/*.png
+!assets/.gitkeep
+
+# Local Neural TTS Models & Voices (Piper ONNX)
+models/*.onnx
+models/*.onnx.json

@@ -3,7 +3,7 @@ import platform
 from typing import Any, Dict, Generator
 import ollama
 
-from history_manager import HistoryManager
+from yves_config import HistoryManager
 from memory.vector_memory import memory_engine
 from tools.app_launcher import launch_app
 from tools.file_ops import list_files, read_file, write_file
